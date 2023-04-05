@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <title>Document</title>
+        <title>Użytkownicy</title>
     </head>
     <body>
 
@@ -133,6 +133,9 @@
                     Nazwisko
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Numer telefonu
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Akcje
                 </th>
             </tr>
@@ -152,7 +155,10 @@
                     {{ $user->name }}
                 </td>
                 <td class="px-6 py-4">
-                    -
+                    {{ $user->surname }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ $user->phone_number }}
                 </td>
                 <td class="px-6 py-4 text-right">
              
