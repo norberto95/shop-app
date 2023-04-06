@@ -3,6 +3,7 @@
 use App\Http\Controllers\HelloWorldController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,5 +34,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/users/list', [UserController::class, 'index'])->name('users.list')->middleware('auth');
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy')->middleware('auth');
+
 
 require __DIR__.'/auth.php';

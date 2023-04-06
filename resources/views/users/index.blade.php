@@ -160,8 +160,12 @@
                 <td class="px-6 py-4">
                     {{ $user->phone_number }}
                 </td>
-                <td class="px-6 py-4 text-right">
-             
+                <td class="px-6 py-4 text-left">
+                    <form action="{{ route('users.destroy', $user->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 delete">X</button>
+                    </form>
                 </td>
             </tr>
             @endforeach
@@ -171,7 +175,6 @@
     {{ $users->links() }}
 </div>
 </div>
-
     
 </body>
 </html>
