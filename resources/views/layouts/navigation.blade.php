@@ -40,7 +40,11 @@
 
 
                         <x-dropdown-link :href="route('users.list')">
-                            {{ __('Users') }}
+                            {{ __('Użytkownicy') }}
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('products.index')">
+                            {{ __('Produkty') }}
                         </x-dropdown-link>
                         
                         <!-- Authentication -->

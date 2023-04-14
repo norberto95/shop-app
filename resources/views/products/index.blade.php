@@ -11,7 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <title>Użytkownicy</title>
+    <title>Produkty</title>
 </head>
 
 <body>
@@ -124,9 +124,19 @@
         </div>
     </nav>
 
-
     <div class="container">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
+
+            <div class="row">
+                <div class="col-6">
+                    <a class="float-right" href="{{ route('products.create') }}">
+                        <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Dodaj</button>
+                    </a>
+                </div>
+                
+            </div>
+
+            <div class="row">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -134,16 +144,16 @@
                             ID
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Email
+                            Nazwa
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Imię
+                            Opis
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Nazwisko
+                            Ilość
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Numer telefonu
+                            Cena
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Akcje
@@ -153,38 +163,45 @@
                 <tbody>
 
 
-                    @foreach($users as $user)
+                    @foreach($products as $product)
                     <tr class="bg-red border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $user->id }}
+                            {{ $product->id }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ $user->email }}
+                            {{ $product->name }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $user->name }}
+                            {{ $product->description }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $user->surname }}
+                            {{ $product->amount }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $user->phone_number }}
+                            {{ $product->price }}
                         </td>
                         <td class="px-6 py-4 text-left">
-                            <button type="submit" class="px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 delete" data-id="{{ $user->id }}">X</button>
+                            <a href="{{ route('products.edit', $product->id) }}">
+                            <button type="button" class="px-3 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-red-700 dark:focus:ring-red-800">E</button>
+                            </a>
+                            <a href="{{ route('products.show', $product->id) }}">
+                            <button type="button" class="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-red-700 dark:focus:ring-red-800">S</button>
+                            </a>
+                            <button type="submit" class="px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 delete" data-id="{{ $product->id }}">X</button>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
+            </div>
             <br>
-            {{ $users->links() }}
+            {{ $products->links() }}
         </div>
     </div>
 
     <script type="text/javascript">
         $(function() {
-               $('.delete').click(function() {
+            $('.delete').click(function() {
                 Swal.fire({
                     title: 'Czy na pewno chcesz usunąć rekord?',
                     icon: 'warning',
@@ -194,20 +211,20 @@
                 }).then((result) => {
                     if (result.value) {
                         $.ajax({
-                            method: "DELETE",
-                            url: "http://shop.test/users/" + $(this).data("id")
-                        })
-                        .done(function(response) {
-                            window.location.reload();
-                        })
-                        .fail(function(response) {
-                            console.log(response);
-                            Swal.fire('Oops...', 'Something went wrong!', 'error');
-                        });
-                }
-            })
+                                method: "DELETE",
+                                url: "http://shop.test/products/" + $(this).data("id")
+                            })
+                            .done(function(response) {
+                                window.location.reload();
+                            })
+                            .fail(function(response) {
+                                console.log(response);
+                                Swal.fire('Oops...', 'Something went wrong!', 'error');
+                            });
+                    }
+                })
+            });
         });
-    });
     </script>
 
 </body>

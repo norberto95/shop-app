@@ -11,7 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <title>Użytkownicy</title>
+    <title>Produkty</title>
 </head>
 
 <body>
@@ -124,92 +124,36 @@
         </div>
     </nav>
 
+    
+    <section class="bg-gray-50 dark:bg-gray-900">
+  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto min-h-screen lg:py-0"> 
+      <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                  Podgląd produktu
+              </h1>
+              <form class="space-y-4 md:space-y-6">
+                  <div>
+                      <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nazwa</label>
+                      <input type="text" name="name" id="name" max="500" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $product->name }}" disabled required>
+                  </div>
+                  <div>
+                      <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opis</label>
+                      <textarea name="description" id="description" max="1500" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>{{ $product->description }}</textarea>
+                  </div>
+                  <div>
+                      <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ilość</label>
+                      <input type="number" name="amount" id="amount" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $product->amount }}" disabled required>
+                  </div>   
+                  <div>
+                      <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cena</label>
+                      <input type="number" name="price" id="price" step="0.01" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $product->price }}" disabled required>
+                  </div>    
+              </form>
+          </div>
+      </div>
+  </div>
+</section>
 
-    <div class="container">
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            ID
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Email
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Imię
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Nazwisko
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Numer telefonu
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Akcje
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
 
 
-                    @foreach($users as $user)
-                    <tr class="bg-red border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $user->id }}
-                        </th>
-                        <td class="px-6 py-4">
-                            {{ $user->email }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $user->name }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $user->surname }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $user->phone_number }}
-                        </td>
-                        <td class="px-6 py-4 text-left">
-                            <button type="submit" class="px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 delete" data-id="{{ $user->id }}">X</button>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            <br>
-            {{ $users->links() }}
-        </div>
-    </div>
-
-    <script type="text/javascript">
-        $(function() {
-               $('.delete').click(function() {
-                Swal.fire({
-                    title: 'Czy na pewno chcesz usunąć rekord?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Tak',
-                    cancelButtonText: 'Nie',
-                }).then((result) => {
-                    if (result.value) {
-                        $.ajax({
-                            method: "DELETE",
-                            url: "http://shop.test/users/" + $(this).data("id")
-                        })
-                        .done(function(response) {
-                            window.location.reload();
-                        })
-                        .fail(function(response) {
-                            console.log(response);
-                            Swal.fire('Oops...', 'Something went wrong!', 'error');
-                        });
-                }
-            })
-        });
-    });
-    </script>
-
-</body>
-
-</html>
